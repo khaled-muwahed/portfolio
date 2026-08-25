@@ -27,6 +27,11 @@ body {
   background: var(--paper);
 }
 
+/* Add smooth scrolling globally */
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -84,6 +89,13 @@ body {
 
 .nav-links a:hover {
   color: var(--gold);
+}
+
+/* Add active state for navbar links */
+.nav-links a.active {
+  color: var(--gold);
+  font-weight: 600;
+  border-bottom: 2px solid var(--gold);
 }
 
 @media (max-width: 600px) {
@@ -250,6 +262,11 @@ body {
 .section-inner {
   width: min(100%, 1000px);
   margin: 0 auto;
+}
+
+section,
+header {
+  scroll-margin-top: 70px;
 }
 
 .section-heading {
