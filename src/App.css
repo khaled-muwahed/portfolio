@@ -1,4 +1,6 @@
-/* Design tokens */
+/* ==========================================================================
+   Design Tokens & Root Variables
+   ========================================================================== */
 :root {
   --ink: #0b1220;
   --ink-soft: #131a2b;
@@ -8,11 +10,18 @@
   --border: #e5e7eb;
   --gold: #f0b429;
   --gold-ink: #92650a;
+  --gold-glow: rgba(240, 180, 41, 0.25);
   --mono:
     ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 }
 
-/* Global */
+/* ==========================================================================
+   Global & Accessibility Defaults
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family:
@@ -27,23 +36,20 @@ body {
   background: var(--paper);
 }
 
-/* Add smooth scrolling globally */
-html {
-  scroll-behavior: smooth;
-}
-
 * {
   box-sizing: border-box;
 }
 
-/* Nav */
-
+/* ==========================================================================
+   Navigation Bar
+   ========================================================================== */
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
   background: rgba(11, 18, 32, 0.85);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -62,6 +68,11 @@ html {
   font-family: var(--mono);
   text-decoration: none;
   font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+}
+
+.nav-brand:hover {
+  opacity: 0.85;
 }
 
 .nav-brand::before {
@@ -80,22 +91,43 @@ html {
 }
 
 .nav-links a {
+  position: relative;
   color: #cbd5e1;
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.2s;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+/* Animated underline expansion on hover and active states */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--gold);
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
 }
 
 .nav-links a:hover {
   color: var(--gold);
 }
 
-/* Add active state for navbar links */
+.nav-links a:hover::after {
+  width: 100%;
+}
+
 .nav-links a.active {
   color: var(--gold);
   font-weight: 600;
-  border-bottom: 2px solid var(--gold);
+}
+
+.nav-links a.active::after {
+  width: 100%;
 }
 
 @media (max-width: 600px) {
@@ -108,8 +140,9 @@ html {
   }
 }
 
-/* Hero */
-
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
 .hero {
   position: relative;
   overflow: hidden;
@@ -226,13 +259,17 @@ html {
   text-decoration: none;
   font-weight: 500;
   transition:
-    background-color 0.2s,
-    transform 0.2s;
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .hero-links a:hover {
   background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .hero-links .primary-link {
@@ -245,6 +282,7 @@ html {
 .hero-links .primary-link:hover {
   background: #dda320;
   border-color: #dda320;
+  box-shadow: 0 4px 16px var(--gold-glow);
 }
 
 @media (max-width: 600px) {
@@ -253,8 +291,9 @@ html {
   }
 }
 
-/* Shared sections */
-
+/* ==========================================================================
+   Shared Section Layouts
+   ========================================================================== */
 .section {
   padding: 100px 24px;
 }
@@ -263,12 +302,10 @@ html {
   width: min(100%, 1000px);
   margin: 0 auto;
 }
-
 section,
 header {
   scroll-margin-top: 70px;
 }
-
 .section-heading {
   margin-bottom: 48px;
 }
@@ -295,8 +332,9 @@ header {
   letter-spacing: -0.03em;
 }
 
-/* Experience */
-
+/* ==========================================================================
+   Experience Section
+   ========================================================================== */
 .experience-list {
   display: flex;
   flex-direction: column;
@@ -305,6 +343,7 @@ header {
 .experience-item {
   padding: 32px 0;
   border-top: 1px solid var(--border);
+  transition: background-color 0.2s ease;
 }
 
 .experience-item:last-child {
@@ -352,8 +391,9 @@ header {
   font-weight: 500;
 }
 
-/* Skills */
-
+/* ==========================================================================
+   Skills Section
+   ========================================================================== */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -373,13 +413,24 @@ header {
 }
 
 .skills-tags span {
-  padding: 6px 10px;
-  border-radius: 4px;
+  padding: 6px 12px;
+  border-radius: 6px;
   background: #f3f4f6;
+  border: 1px solid rgba(0, 0, 0, 0.03);
   color: #374151;
   font-family: var(--mono);
   font-size: 0.8rem;
   font-weight: 500;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.skills-tags span:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 600px) {
@@ -389,8 +440,9 @@ header {
   }
 }
 
-/* Projects */
-
+/* ==========================================================================
+   Projects Section
+   ========================================================================== */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -403,13 +455,15 @@ header {
   border-radius: 12px;
   background: var(--paper);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+  transform: translateY(-6px);
+  border-color: rgba(240, 180, 41, 0.5);
+  box-shadow: 0 16px 32px rgba(11, 18, 32, 0.08);
 }
 
 .project-image {
@@ -448,7 +502,7 @@ header {
 
 .project-status {
   flex-shrink: 0;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
   background: rgba(240, 180, 41, 0.14);
   color: var(--gold-ink);
@@ -488,14 +542,17 @@ header {
   color: var(--gold-ink);
   font-weight: 600;
   text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
 .project-links a:hover {
   text-decoration: underline;
+  opacity: 0.8;
 }
 
-/* Contact */
-
+/* ==========================================================================
+   Contact Section
+   ========================================================================== */
 .contact {
   padding-top: 80px;
   padding-bottom: 120px;
@@ -524,15 +581,17 @@ header {
   text-decoration: none;
   font-weight: 500;
   transition:
-    background-color 0.2s,
-    border-color 0.2s,
-    transform 0.2s;
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .contact-links a:hover {
   background: #f3f4f6;
   border-color: #9ca3af;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .contact-links .contact-primary {
@@ -544,10 +603,12 @@ header {
 .contact-links .contact-primary:hover {
   background: #dda320;
   border-color: #dda320;
+  box-shadow: 0 4px 14px var(--gold-glow);
 }
 
-/* Responsive */
-
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
 @media (max-width: 700px) {
   .section {
     padding: 72px 20px;

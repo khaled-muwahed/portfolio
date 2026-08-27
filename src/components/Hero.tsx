@@ -17,7 +17,7 @@ const Hero = () => {
         </p>
 
         <div className="hero-links">
-          <a href="/cv.pdf" target="_blank" rel="noopener noreferrer">
+          <a href="/project/cv.pdf" target="_blank" rel="noopener noreferrer">
             CV
           </a>
 
