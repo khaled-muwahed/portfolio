@@ -19,7 +19,7 @@ export const ProjectsInfo: ProjectData[] = [
     github: "",
     demo: "",
     status: "Production",
-    image: "/public/project/wait-less.png",
+    image: "/project/wait-less.png",
   },
   {
     id: "baklava-bliss",
@@ -30,7 +30,7 @@ export const ProjectsInfo: ProjectData[] = [
     github: "https://github.com/khaled-muwahed/baklava-web",
     demo: "https://baklava.vercel.app/",
     status: "Completed",
-    image: "/public/project/baklava-bliss.png",
+    image: "/project/baklava-bliss.png",
   },
   {
     id: "velolink",
