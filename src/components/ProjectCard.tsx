@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ProjectData } from "./ProjectsInfo";
 
 type ProjectCardProps = {
@@ -5,16 +6,25 @@ type ProjectCardProps = {
 };
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
+  const [imageFailed, setImageFailed] = useState(false);
+
+  const showImage = !!project.image && !imageFailed;
+
   return (
     <article className="project-card">
-      {project.image ? (
+      {showImage ? (
         <img
           className="project-image"
           src={project.image}
           alt={`${project.title} screenshot`}
+          onError={() => setImageFailed(true)}
         />
       ) : (
-        <div className="project-image project-image-placeholder">
+        <div
+          className="project-image project-image-placeholder"
+          role="img"
+          aria-label={project.title}
+        >
           <span>{project.title}</span>
         </div>
       )}
