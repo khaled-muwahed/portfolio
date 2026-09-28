@@ -11,6 +11,27 @@ export type ProjectData = {
 
 export const ProjectsInfo: ProjectData[] = [
   {
+    id: "velolink",
+    title: "VeloLink",
+    description:
+      "A full-stack vehicle recovery platform connecting customers with independent recovery drivers. I designed and built the platform end-to-end, from the customer booking experience and payments to admin operations, driver workflows and secure image handling.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Stripe",
+      "Google Maps",
+      "Cloudflare R2",
+      "Docker",
+    ],
+    github: "",
+    demo: "https://www.velolink.co.uk",
+    status: "Live",
+    image: "/project/velolink.png",
+  },
+  {
     id: "wait-less",
     title: "Wait-Less",
     description:
@@ -31,15 +52,5 @@ export const ProjectsInfo: ProjectData[] = [
     demo: "https://baklava.vercel.app/",
     status: "Completed",
     image: "/project/baklava-bliss.png",
-  },
-  {
-    id: "velolink",
-    title: "VeloLink",
-    description:
-      "An on-demand vehicle recovery marketplace connecting customers who need roadside assistance with independent recovery drivers. Customers can enter their vehicle and recovery details, receive a price estimate and pay a deposit online, while an admin dashboard handles driver assignment.",
-    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    github: "",
-    demo: "",
-    status: "In progress",
   },
 ];
